@@ -1,7 +1,17 @@
+import 'package:wma_connectivity/src/connections/dns_connection.dart';
 import 'package:wma_connectivity/src/sensor_event_type.dart';
 
 class DnsSensorEventType extends SensorEventType {
-  const DnsSensorEventType() : super(global: false);
+  const DnsSensorEventType({
+    required this.threshold,
+  }) : super(global: false);
+
+  final double threshold;
+
+  @override
+  DnsConnection create(double metric) {
+    return DnsConnection(metric >= threshold);
+  }
 
   @override
   String toString() => 'DnsSensorEventType';

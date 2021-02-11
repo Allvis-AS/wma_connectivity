@@ -22,15 +22,19 @@ class SensorEvent {
   final DateTime timestamp;
 
   /// Constructs an event for an API sensor.
-  factory SensorEvent.api(bool reached, [DateTime? timestamp]) => SensorEvent(
-        type: ApiSensorEventType(),
+  factory SensorEvent.api(bool reached, double threshold,
+          [DateTime? timestamp]) =>
+      SensorEvent(
+        type: ApiSensorEventType(threshold: threshold),
         value: reached ? 1.0 : 0.0,
         timestamp: timestamp ?? DateTime.now(),
       );
 
   /// Constructs an event for a DNS sensor.
-  factory SensorEvent.dns(bool reached, [DateTime? timestamp]) => SensorEvent(
-        type: DnsSensorEventType(),
+  factory SensorEvent.dns(bool reached, double threshold,
+          [DateTime? timestamp]) =>
+      SensorEvent(
+        type: DnsSensorEventType(threshold: threshold),
         value: reached ? 1.0 : 0.0,
         timestamp: timestamp ?? DateTime.now(),
       );
