@@ -12,6 +12,7 @@ class ApiSensor implements Sensor {
     double threshold = 0.5,
     Duration interval = const Duration(seconds: 10),
     Duration timeout = const Duration(seconds: 10),
+    this.trustBadCertificate = false,
   }) : type = ApiSensorEventType(threshold: threshold) {
     _events = Stream.periodic(interval, (i) => i)
         .exhaustMap((_) => Stream.fromFuture(_check(timeout))
@@ -29,6 +30,11 @@ class ApiSensor implements Sensor {
   /// i.e. `https://api.contoso.com/ping` with a successful response (it does
   /// not have to be empty).
   final Uri uri;
+
+  /// Blindly accepts self-signed/bad HTTPS certificates.
+  ///
+  /// **Do not use in production!**
+  final bool trustBadCertificate;
 
   final _destroy = PublishSubject<void>();
   late final Stream<SensorEvent> _events;
@@ -48,6 +54,9 @@ class ApiSensor implements Sensor {
 
   Future<bool> _check(Duration timeout) async {
     final client = HttpClient();
+    if (trustBadCertificate) {
+      client.badCertificateCallback = (cert, host, port) => true;
+    }
     try {
       client.connectionTimeout = timeout;
       final request = await HttpClient().getUrl(uri);
