@@ -86,6 +86,48 @@ the `SocketException` exceptions. Transform those into
 a `Stream<SensorEvent>` with the `SensorEvent.socketException()`
 factory helper method.
 
+Like this:
+```dart
+import 'dart:io';
+
+import 'package:dio/dio.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:wma_connectivity/wma_connectivity.dart';
+
+class SocketExceptionInterceptor extends Interceptor implements Sensor {
+  SocketExceptionInterceptor();
+
+  // This will serve as our event stream
+  final _events = PublishSubject<SensorEvent>();
+
+  @override
+  Future onError(DioError err) async {
+    if (err.type == DioErrorType.DEFAULT) {
+      final error = err.error;
+      if (error is SocketException) {
+        // This is where we record the events
+        _events.add(SensorEvent.socketException());
+      }
+    }
+    return super.onError(err);
+  }
+
+  @override
+  void dispose() {
+    // Always remember to clean up 😉
+    _events.close();
+  }
+
+  // Return the PublishSubject here
+  @override
+  Stream<SensorEvent> get events => _events;
+
+  // Use the ready-to-go event type or make your own
+  @override
+  SensorEventType get type => const SocketExceptionSensorEventType(); 
+}
+```
+
 And you're done!
 
 ## License
