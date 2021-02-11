@@ -12,7 +12,4 @@ class DnsSensorEventType extends SensorEventType {
 
     return o is DnsSensorEventType;
   }
-
-  @override
-  int get hashCode => 31;
 }

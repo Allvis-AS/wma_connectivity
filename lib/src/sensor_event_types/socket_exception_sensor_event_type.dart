@@ -12,7 +12,4 @@ class SocketExceptionSensorEventType extends SensorEventType {
 
     return o is SocketExceptionSensorEventType;
   }
-
-  @override
-  int get hashCode => 31;
 }
