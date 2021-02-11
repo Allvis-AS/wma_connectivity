@@ -1,0 +1,23 @@
+name: wma_connectivity
+description: Combines different sources of network events and tries to estimate
+  the connectivity of the device using a Weighted Moving Average.
+version: 0.0.1-nullsafety.1
+homepage: https://github.com/Allvis-AS/wma_connectivity
+repository: https://github.com/Allvis-AS/wma_connectivity
+issue_tracker: https://github.com/Allvis-AS/wma_connectivity/issues
+
+environment:
+  sdk: ">=2.12.0-133.2.beta <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  meta: ^1.3.0-nullsafety.6
+  rxdart: ^0.26.0-nullsafety.1
+
+dev_dependencies:
+  pedantic: ^1.10.0-nullsafety
+  test: ^1.16.0-nullsafety.17
+
+flutter: null
