@@ -21,4 +21,7 @@ class FakeSensorEventType extends SensorEventType {
 
     return o is FakeSensorEventType;
   }
+
+  @override
+  int get hashCode => 31;
 }

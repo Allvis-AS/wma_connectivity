@@ -12,4 +12,7 @@ class ApiSensorEventType extends SensorEventType {
 
     return o is ApiSensorEventType;
   }
+
+  @override
+  int get hashCode => 31;
 }
