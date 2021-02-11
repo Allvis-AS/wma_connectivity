@@ -1,7 +1,7 @@
 name: wma_connectivity
 description: Combines different sources of network events and tries to estimate
   the connectivity of the device using a Weighted Moving Average.
-version: 0.0.1
+version: 0.0.1-nullsafety.1
 homepage: https://github.com/Allvis-AS/wma_connectivity
 repository: https://github.com/Allvis-AS/wma_connectivity
 issue_tracker: https://github.com/Allvis-AS/wma_connectivity/issues
