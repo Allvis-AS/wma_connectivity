@@ -1,3 +1,7 @@
+## [0.0.1-nullsafety.2] - Feb 12, 2021
+
+* Use the correct HttpClient in ApiSensor
+
 ## [0.0.1-nullsafety.1] - Feb 11, 2021
 
 * Initial release

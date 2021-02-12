@@ -59,7 +59,7 @@ class ApiSensor implements Sensor {
     }
     try {
       client.connectionTimeout = timeout;
-      final request = await HttpClient().getUrl(uri);
+      final request = await client.getUrl(uri);
       final response = await request.close();
       return response.statusCode == 200;
     } finally {
