@@ -47,7 +47,7 @@ extension _StreamExtensions<T> on Stream<T> {
       final wall = DateTime.now().subtract(window);
       final test = (T value) => wall.isBefore(selector(value));
       return [
-        ...acc!.where(test),
+        ...acc.where(test),
         if (test(value)) value,
       ];
     }, []);

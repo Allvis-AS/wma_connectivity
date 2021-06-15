@@ -21,7 +21,7 @@ class DnsSensor implements Sensor {
         .exhaustMap((_) => Rx.merge(hosts.map((h) =>
                 Stream.fromFuture(InternetAddress.lookup(h))
                     .mapTo(SensorEvent.dns(true, threshold))
-                    .onErrorResume((e) => Stream.empty())))
+                    .onErrorResume((_, __) => Stream.empty())))
             .take(1)
             .defaultIfEmpty(SensorEvent.dns(false, threshold))
             .timeout(timeout)
